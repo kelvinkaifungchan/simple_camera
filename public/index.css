@@ -1,0 +1,44 @@
+html {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: small;
+}
+
+button {
+    outline: 0mm;
+    border: 0mm;
+    background-color: white;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+table {
+	width: 640px;
+	font-weight: normal;
+}
+
+table tr {
+	border-bottom: 0.25px solid #000000;
+}
+
+table th {
+	font-weight:normal;
+}
+
+video {
+    background-color: black;
+}
+
+.cardTemplate {
+    display: none;
+}
+
+.recording {
+    display: none;
+}
+
+#recording {
+    color: red;
+    display: none;
+}

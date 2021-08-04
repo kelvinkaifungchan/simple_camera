@@ -19,12 +19,25 @@
                 <button id="start">Start Feed</button>
                 <button id="stopCamera">Stop Camera</button>
                 <button id="stopMicrophone">Stop Microphone</button>
-                <button id="startRecording">Start Recording</button>
-                <button id="stopRecording">Stop Recording</button>
-                <a id="download"><button>Download Video</button></a>
+                <button id="recordingButton">Recording</button>
+                <button id="startRecording" class="recording">Start</button>
+                <button id="stopRecording" class="recording">Stop</button>
+                <a id="download" download="test.webm" class="recording"><button>Download</button></a>
+                <button id="saveRecording" class="recording">Save</button>
                 <button id="recording">RECORDING</button>
                 <div class="pt-3">
-                    <video id="video" width="800" height="450" autoplay mute></video>
+                    <video id="video" width="640" height="480" autoplay mute></video>
+                </div>
+                <div class="pt-3">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Files</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
