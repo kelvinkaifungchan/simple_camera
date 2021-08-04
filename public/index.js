@@ -2,7 +2,9 @@ $(function () {
 
     let cameraStream;
     let recorder;
-    let recorded = []
+    let blob;
+    let recorded = [];
+    let number = 0;
 
     let recordingFunction = 0;
     $("#recordingButton").click(function () {
@@ -18,17 +20,17 @@ $(function () {
             recordingFunction = 0;
         }
     })
-
-    // $.get("http://localhost:3000/upload", function (data) {
-    //     for (i = 0; i < data.length; i++) {
-    //         $("tbody").append(
-    //             `<tr>
-    //         <td class="filename" id="${data[i]}"><i>${data[i]}</i></td>
-    //         </tr>
-    //         `
-    //         )
-    //     }
-    // })
+    
+    $.get("http://localhost:3000/save", function (data) {
+        for (i = 0; i < data.length; i++) {
+            $("tbody").append(
+                `<tr>
+            <td class="filename" id="${data[i]}"><i>${data[i]}</i></td>
+            </tr>
+            `
+            )
+        }
+    })
 
     $("#start").on("click", async function () {
         try {
@@ -68,24 +70,43 @@ $(function () {
 
     $("#startRecording").on("click", function () {
         $("#recording").css("display", "inline")
-        recorder = new MediaRecorder(cameraStream, {mimeType: 'video/webm'});
-        recorder.ondataavailable = function(e) {
+        recorder = new MediaRecorder(cameraStream, {
+            mimeType: 'video/webm'
+        });
+        recorder.ondataavailable = function (e) {
             recorded.push(e.data)
         }
-        recorder.onstop = function(e) {
-            let blob = new Blob(recorded, {type: 'video/webm'});
-            console.log(blob);
-            console.log(recorded)
-            let videoLocal = URL.createObjectURL(new Blob(recorded, {type: 'video/webm'}));
+        recorder.onstop = function (e) {
+            blob = new Blob(recorded, {
+                type: 'video/webm'
+            });
+            console.log("this is the blob", blob);
+            let videoLocal = URL.createObjectURL(new Blob(recorded, {
+                type: 'video/webm'
+            }));
             $("#download").attr("href", videoLocal)
             console.log("URL", videoLocal)
         }
         recorder.start(1000);
     })
 
-    $("#stopRecording").on("click", function() {
+    $("#stopRecording").on("click", function () {
         $("#recording").css("display", "none")
         recorder.stop();
+    })
+
+    $("#saveRecording").on("click", function () {
+        let formData = new FormData();
+        formData.append("file", blob, `${number}.webm`);
+        number += 1;
+        $.ajax({
+            url: "http://localhost:3000/save",
+            type: "POST",
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false
+        })
     })
 
 });
