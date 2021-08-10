@@ -24,6 +24,7 @@
                 <button id="stopRecording" class="recording">Stop</button>
                 <a id="download" download="test.webm" class="recording"><button>Download</button></a>
                 <button id="saveRecording" class="recording">Save</button>
+                <button id="uploadRecording" class="recording">Upload</button>
                 <button id="recording">RECORDING</button>
                 <div class="pt-3">
                     <video id="video" width="640" height="480" autoplay mute></video>
@@ -38,12 +39,16 @@
                         <tbody>
                         </tbody>
                     </table>
+                    <video id="video" width="640" height="480" autoplay mute controls>
+                        <source src="https://testingbucketwebdev.s3.ap-southeast-1.amazonaws.com/0.webm" type="video/webm">
+                    </video>
                 </div>
             </div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://sdk.amazonaws.com/js/aws-sdk-2.964.0.min.js"></script>
     <script src="./index.js" async defer></script>
 </body>
 

@@ -97,10 +97,24 @@ $(function () {
 
     $("#saveRecording").on("click", function () {
         let formData = new FormData();
-        formData.append("file", blob, `${number}.webm`);
+        formData.append("file", blob, `${number}.mp4`);
         number += 1;
         $.ajax({
             url: "http://localhost:3000/save",
+            type: "POST",
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false
+        })
+    })
+
+    $("#uploadRecording").on("click", function () {
+        let formData = new FormData();
+        formData.append("file", blob, `${number}.webm`);
+        number += 1;
+        $.ajax({
+            url: "http://localhost:3000/upload",
             type: "POST",
             data: formData,
             cache: false,
